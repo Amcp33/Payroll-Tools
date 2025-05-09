@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PS/Letter Request</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <img src="./Images/all-care-logo-q2qz3gee65ojncfzs1kbyll1zuo83hxx520llb629s.png"/>
+
+  <h1>Paystub/Job Letter Request</h1>
+
+  <!-- ✅ THE FORM -->
+  <form id="myForm">
+    <label>Request Type:</label>
+    <select name="request_type" required>
+      <option value="">--Choose--</option>
+      <option value="Employment Letter">Employment Letter</option>
+      <option value="Termination Letter">Termination Letter</option>
+      <option value="Paystubs">Paystubs</option>
+    </select>
+
+    <label>PA PIN:</label>
+    <input name="pa_pin" placeholder="PA PIN" required />
+
+    <label>PA Name:</label>
+    <input name="pa_name" placeholder="PA Name" required />
+
+    <label>E-mail:</label>
+    <input type="email" name="email" placeholder="E-mail" required />
+
+    <label>Requested By:</label>
+    <select name="requested_by" required>
+      <option value="">--Choose--</option>
+      <option value="Ana">Ana</option>
+      <option value="Cecilia">Cecilia</option>
+      <option value="Maria S.">Maria S.</option>
+      <option value="Kailun">Kailun</option>
+      <option value="Brad">Brad</option>
+      <option value="Faheem">Faheem</option>
+      <option value="Louis">Louis</option>
+      <option value="Amancio">Amancio</option>
+      <option value="Ali">Ali</option>
+      <option value="Shafi">Shafi</option>
+    </select>
+
+    <label>Comments (optional):</label>
+    <input name="optional_note" placeholder="Write here" />
+
+    <button type="submit">Send</button>
+  </form>
+
+  <!-- ✅ SUCCESS MESSAGE -->
+  <p id="successMsg" class="fade-message" style="display:none; color: green; font-weight: bold;">
+    Submitted! You can send another.
+  </p>
+
+  <!-- ✅ FETCH-BASED SUBMISSION SCRIPT -->
+  <script>
+const form = document.getElementById("myForm");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const params = new URLSearchParams(formData);
+  const url = "https://script.google.com/macros/s/AKfycbxM9LXiswf-HA_lDtR-ZmyVvv9eYTDaNp0B9HTIGl1VlJhfUoEnEqx0147XJ_GZmYeMzw/exec?" + params.toString();
+
+  fetch(url)  // <-- GET by default
+    .then((res) => res.text())
+    .then((text) => {
+      console.log("Success:", text);
+      document.getElementById("successMsg").style.display = "block";
+      form.reset();
+    })
+    .catch((err) => {
+      console.error("Fetch error:", err);
+    });
+});
+
+  </script>
+  
+</body>
+</html>
